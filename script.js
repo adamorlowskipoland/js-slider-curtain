@@ -19,30 +19,44 @@ const model = {
 }
 
 const octopus = {
-    "setAtributes" : function(x) {
-        var pic = document.getElementById("pic");
-        pic.setAttribute('src', model.pics[x].imgSrc);
-        pic.setAttribute('alt', model.pics[x].imgAlt);
+    "getImg" : function() {
+        var pic1 = document.getElementById('pic1');
+        pic1.style.transform = "rotateX(-115deg)";
+        return pic1;
     },
-    "changeAttributes" : function() {
+    "setImg" : function(x) {
+        var pic = octopus.getImg();
+        setTimeout(function() {
+            pic.setAttribute('src', model.pics[x].imgSrc);
+            pic.setAttribute('alt', model.pics[x].imgAlt);            
+        },700);
+        octopus.changeRotation();
+    },
+    "changeImg" : function() {
         var x = 0;
         setInterval(function() {
             if (x == (model.pics.length-1)) {
                 x = 0;
-                octopus.setAtributes(x);
+                octopus.setImg(x);
             } else {
                 x++;
-                octopus.setAtributes(x);
+                octopus.setImg(x);
             }
         }, 3000);
+    },
+    "changeRotation" : function() {
+        var pic = octopus.getImg();
+        setTimeout(function() {
+            pic.style.transform = "rotateX(-0.0001deg)";            
+        }, 700);
     }
 }
 
 
 const view = {
     displayPic : function() {
-        octopus.setAtributes(0);
-        octopus.changeAttributes();
+        octopus.setImg(0);
+        octopus.changeImg();
     }
 }
 

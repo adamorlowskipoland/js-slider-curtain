@@ -7,11 +7,19 @@ body {
 }
 
 .wrapper {
+    background: url("imgs/bgpic.jpg");
+    background-position: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
     max-width: 1200px;
     height: 100vh;
     margin: 0 auto;
+    perspective: 1000px;
 }
 
 img {
     width: 100%;
+    transform-origin: top;
+    transition: 700ms;
+    transform: rotateX(-115deg);
 }
