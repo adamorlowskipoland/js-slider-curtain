@@ -14,6 +14,11 @@ const model = {
             "imgName" : "pic3",
             "imgSrc" : "imgs/pic3.jpg",
             "imgAlt" : "Img training 3"
+        },
+        {
+            "imgName" : "pic4",
+            "imgSrc" : "imgs/pic4.jpg",
+            "imgAlt" : "Img training 4"
         }
     ]
 }
