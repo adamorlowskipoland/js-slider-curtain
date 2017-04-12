@@ -23,14 +23,26 @@ const octopus = {
         var pic = document.getElementById("pic");
         pic.setAttribute('src', model.pics[x].imgSrc);
         pic.setAttribute('alt', model.pics[x].imgAlt);
-        console.log(pic);
     },
+    "changeAttributes" : function() {
+        var x = 0;
+        setInterval(function() {
+            if (x == (model.pics.length-1)) {
+                x = 0;
+                octopus.setAtributes(x);
+            } else {
+                x++;
+                octopus.setAtributes(x);
+            }
+        }, 3000);
+    }
 }
 
 
 const view = {
     displayPic : function() {
-        octopus.setAtributes(2);
+        octopus.setAtributes(0);
+        octopus.changeAttributes();
     }
 }
 

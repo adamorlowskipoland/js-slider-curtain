@@ -6,12 +6,3 @@
 img {
     width: 100%;
 }
-
-
-.pic {
-    visibility: hidden;
-}
-
-.active {
-    visibility: visible;
-}
