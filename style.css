@@ -1,5 +1,14 @@
+body {
+    background: #518acc; /* Old browsers */
+    background: -moz-linear-gradient(left, #518acc 0%, #9b66ff 30%, #b439e5 71%, #7db9e8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #518acc 0%,#9b66ff 30%,#b439e5 71%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #518acc 0%,#9b66ff 30%,#b439e5 71%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#518acc', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 */
+}
+
 .wrapper {
-    width: 80%;
+    max-width: 1200px;
+    height: 100vh;
     margin: 0 auto;
 }
 
