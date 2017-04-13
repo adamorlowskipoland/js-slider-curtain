@@ -14,11 +14,12 @@ body {
     height: 100vh;
     margin: 0 auto;
     perspective: 1000px;
+    perspective-origin: top;
 }
 
 img {
     width: 100%;
     transform-origin: top;
     transition: 700ms;
-    transform: rotateX(-115deg);
+    transform: rotateX(-90deg);
 }

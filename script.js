@@ -26,7 +26,7 @@ const model = {
 const octopus = {
     "getImg" : function() {
         var pic1 = document.getElementById('pic1');
-        pic1.style.transform = "rotateX(-115deg)";
+        pic1.style.transform = "rotateX(-90deg)";
         return pic1;
     },
     "setImg" : function(x) {
