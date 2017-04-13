@@ -43,9 +43,11 @@ const octopus = {
             if (x == (model.pics.length-1)) {
                 x = 0;
                 octopus.setImg(x);
+                octopus.addActiveClass(x);
             } else {
                 x++;
                 octopus.setImg(x);
+                octopus.addActiveClass(x);
             }
         }, 3000);
     },
@@ -54,6 +56,21 @@ const octopus = {
         setTimeout(function() {
             pic.style.transform = "rotateX(-0.0001deg)";            
         }, 700);
+    },
+    "createLIs" : function() {
+        var UL = document.getElementById('UL');
+        for (var i = 0; i <= model.pics.length-1; i++) {
+            var LI = document.createElement('li');
+            LI.className = 'indicator';
+            UL.appendChild(LI);
+        }
+    },
+    "addActiveClass" : function(x) {
+        var indicators = Array.from(document.getElementsByClassName('indicator'));
+        for (var i = 0; i < indicators.length; i++) {
+            indicators[i].classList.remove('active');
+            indicators[x].classList.add('active');
+        }
     }
 }
 
@@ -61,6 +78,8 @@ const octopus = {
 const view = {
     displayPic : function() {
         octopus.setImg(0);
+        octopus.createLIs();
+        octopus.addActiveClass(0);
         octopus.changeImg();
     }
 }
