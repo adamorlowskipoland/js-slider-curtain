@@ -24,6 +24,8 @@ const model = {
 }
 
 const octopus = {
+    "myTimeOut" : "",
+
     "getImg" : function() {
         var pic1 = document.getElementById('pic1');
         pic1.style.transform = "rotateX(-90deg)";
@@ -37,19 +39,23 @@ const octopus = {
         },700);
         octopus.changeRotation();
     },
-    "changeImg" : function() {
-        var x = 0;
-        setInterval(function() {
-            if (x == (model.pics.length-1)) {
-                x = 0;
-                octopus.setImg(x);
-                octopus.addActiveClass(x);
-            } else {
-                x++;
-                octopus.setImg(x);
-                octopus.addActiveClass(x);
-            }
-        }, 3000);
+    "carousel" : function(x) {
+        octopus.myTimeOut = setTimeout(function() {octopus.changeImg(x)}, 3000);
+    },
+
+    "changeImg" : function(x) {
+        var x = x;
+        if (x == (model.pics.length-1)) {
+            x = 0;
+            octopus.setImg(x);
+            octopus.addActiveClass(x);
+            octopus.carousel(x);
+        } else {
+            x++;
+            octopus.setImg(x);
+            octopus.addActiveClass(x);
+            octopus.carousel(x);
+        }
     },
     "changeRotation" : function() {
         var pic = octopus.getImg();
@@ -67,10 +73,17 @@ const octopus = {
     },
     "addActiveClass" : function(x) {
         var indicators = Array.from(document.getElementsByClassName('indicator'));
-        for (var i = 0; i < indicators.length; i++) {
-            indicators[i].classList.remove('active');
-            indicators[x].classList.add('active');
-        }
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        indicators[x].classList.add('active');
+        
+    },
+    "eventListeners" : function() {
+        const indicators = Array.from(document.getElementsByClassName('indicator'));
+        indicators.forEach(indicator => indicator.addEventListener('click', function() {
+            console.log('damn!');
+            clearTimeout(octopus.myTimeOut);
+        }))
+
     }
 }
 
@@ -80,7 +93,8 @@ const view = {
         octopus.setImg(0);
         octopus.createLIs();
         octopus.addActiveClass(0);
-        octopus.changeImg();
+        octopus.carousel(0);
+        octopus.eventListeners();
     }
 }
 
