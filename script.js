@@ -80,8 +80,11 @@ const octopus = {
     "eventListeners" : function() {
         const indicators = Array.from(document.getElementsByClassName('indicator'));
         indicators.forEach(indicator => indicator.addEventListener('click', function() {
-            console.log('damn!');
+            var index = indicators.indexOf(this);
             clearTimeout(octopus.myTimeOut);
+            octopus.setImg(index);
+            octopus.carousel(index);
+            octopus.addActiveClass(index);
         }))
 
     }
