@@ -83,8 +83,8 @@ const octopus = {
             var index = indicators.indexOf(this);
             clearTimeout(octopus.myTimeOut);
             octopus.setImg(index);
-            octopus.carousel(index);
             octopus.addActiveClass(index);
+            octopus.carousel(index);
         }))
 
     }
