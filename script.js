@@ -25,18 +25,32 @@ const model = {
 
 const octopus = {
     "myTimeOut" : "",
+    "getWrapper" : function() {
+        var wrapper = document.getElementById('wrapper');
+        return wrapper;
+    },
+    "createImg" : function() {
+        var pic = document.createElement('img');
+        pic.id = 'pic'
+        pic.style.transform = 'rotateX(-90deg)';
+        return pic;
+    },
 
     "getImg" : function() {
-        var pic1 = document.getElementById('pic1');
-        pic1.style.transform = "rotateX(-90deg)";
-        return pic1;
+        var wrapper = octopus.getWrapper(); 
+        wrapper.style.perspectiveOrigin = "top";
+        var pic = document.getElementById('pic');
+        pic.style.transform = "rotateX(-90deg)";
+        pic.style.transformOrigin = "top";
+        return pic;
     },
     "setImg" : function(x) {
-        var pic = octopus.getImg();
-        setTimeout(function() {
+        // octopus.clearWrapper();
+        var pic = octopus.createImg();
+        var wrapper = octopus.getWrapper();
+        wrapper.appendChild(pic);
             pic.setAttribute('src', model.pics[x].imgSrc);
-            pic.setAttribute('alt', model.pics[x].imgAlt);            
-        },700);
+            pic.setAttribute('alt', model.pics[x].imgAlt);
         octopus.changeRotation();
     },
     "carousel" : function(x) {
@@ -60,8 +74,29 @@ const octopus = {
     "changeRotation" : function() {
         var pic = octopus.getImg();
         setTimeout(function() {
-            pic.style.transform = "rotateX(-0.0001deg)";            
-        }, 700);
+            pic.style.transform = "rotateX(-0.0001deg)";
+            var wrapper = octopus.getWrapper();
+            setTimeout(function() {
+                octopus.rotationToBottom();
+            },800);
+        }, 300);
+    },
+    "rotationToBottom" : function() {
+        var pic = octopus.getImg();
+        var wrapper = octopus.getWrapper();
+        wrapper.style.perspectiveOrigin = "bottom";
+        pic.style.transformOrigin = "bottom";
+        pic.style.transform = "rotateX(1deg)";
+        setTimeout(function() {
+            pic.style.transform = "rotateX(90deg)";
+            octopus.clearWrapper();
+        }, 800)
+    },
+    "clearWrapper" : function() {
+        var wrapper = octopus.getWrapper();
+        setTimeout(function() {
+            wrapper.innerHTML = "";
+        }, 700)
     },
     "createLIs" : function() {
         var UL = document.getElementById('UL');
