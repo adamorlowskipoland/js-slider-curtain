@@ -25,6 +25,11 @@ const model = {
 
 const octopus = {
     "myTimeOut" : "",
+    "clearWrapperTimeOut" : "",
+    "changeRotationTimeOutShow" : "",
+    "changeRotationTimeOutHide" : "",
+    "rotationToBottomTimeOut" : "",
+
     "getWrapper" : function() {
         var wrapper = document.getElementById('wrapper');
         return wrapper;
@@ -39,19 +44,34 @@ const octopus = {
     "getImg" : function() {
         var wrapper = octopus.getWrapper(); 
         wrapper.style.perspectiveOrigin = "top";
-        var pic = document.getElementById('pic');
+        if (wrapper.hasChildNodes()) {
+            var pic = document.getElementById('pic');
+        } else {
+            var pic = octopus.createImg();
+        }       
         pic.style.transform = "rotateX(-90deg)";
         pic.style.transformOrigin = "top";
         return pic;
+
     },
     "setImg" : function(x) {
-        // octopus.clearWrapper();
-        var pic = octopus.createImg();
+        var pic = octopus.getImg();
         var wrapper = octopus.getWrapper();
         wrapper.appendChild(pic);
-            pic.setAttribute('src', model.pics[x].imgSrc);
-            pic.setAttribute('alt', model.pics[x].imgAlt);
+        pic.setAttribute('src', model.pics[x].imgSrc);
+        pic.setAttribute('alt', model.pics[x].imgAlt);
         octopus.changeRotation();
+    },
+    "manualSetImg" : function(index) {
+        var wrapper = octopus.getWrapper();
+        wrapper.innerHTML = "";
+        clearTimeout(octopus.myTimeOut);
+        clearTimeout(octopus.clearWrapperTimeOut);
+        clearTimeout(octopus.changeRotationTimeOutShow);
+        clearTimeout(octopus.changeRotationTimeOutHide);
+        clearTimeout(octopus.rotationToBottomTimeOut);
+        octopus.setImg(index);
+        octopus.carousel(index);
     },
     "carousel" : function(x) {
         octopus.myTimeOut = setTimeout(function() {octopus.changeImg(x)}, 3000);
@@ -73,28 +93,28 @@ const octopus = {
     },
     "changeRotation" : function() {
         var pic = octopus.getImg();
-        setTimeout(function() {
+        octopus.changeRotationTimeOutShow = setTimeout(function() {
             pic.style.transform = "rotateX(-0.0001deg)";
             var wrapper = octopus.getWrapper();
-            setTimeout(function() {
+            octopus.changeRotationTimeOutHide = setTimeout(function() {
                 octopus.rotationToBottom();
-            },800);
-        }, 300);
+            }, 1350);
+        }, 100);
     },
     "rotationToBottom" : function() {
         var pic = octopus.getImg();
         var wrapper = octopus.getWrapper();
         wrapper.style.perspectiveOrigin = "bottom";
         pic.style.transformOrigin = "bottom";
-        pic.style.transform = "rotateX(1deg)";
-        setTimeout(function() {
+        pic.style.transform = "rotateX(0.0001deg)";
+        octopus.rotationToBottomTimeOut = setTimeout(function() {
             pic.style.transform = "rotateX(90deg)";
             octopus.clearWrapper();
         }, 800)
     },
     "clearWrapper" : function() {
         var wrapper = octopus.getWrapper();
-        setTimeout(function() {
+        octopus.clearWrapperTimeOut = setTimeout(function() {
             wrapper.innerHTML = "";
         }, 700)
     },
@@ -116,10 +136,8 @@ const octopus = {
         const indicators = Array.from(document.getElementsByClassName('indicator'));
         indicators.forEach(indicator => indicator.addEventListener('click', function() {
             var index = indicators.indexOf(this);
-            clearTimeout(octopus.myTimeOut);
-            octopus.setImg(index);
+            octopus.manualSetImg(index);
             octopus.addActiveClass(index);
-            octopus.carousel(index);
         }))
 
     }
