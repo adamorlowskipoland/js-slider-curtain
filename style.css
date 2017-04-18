@@ -1,7 +1,6 @@
 html {
     box-sizing: border-box;
 }
-
 body {
     background: #518acc; /* Old browsers */
     background: -moz-linear-gradient(left, #518acc 0%, #9b66ff 30%, #b439e5 71%, #7db9e8 100%); /* FF3.6-15 */
@@ -9,19 +8,16 @@ body {
     background: linear-gradient(to right, #518acc 0%,#9b66ff 30%,#b439e5 71%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#518acc', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 */
 }
-
 .wrapper {
     background: url("imgs/bgpic.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 600px;
-    height: 400px;
-    /*height: 80vh;*/
+    width: 900px;
+    height: 600px;
     margin: 0 auto;
     perspective: 1000px;
     perspective-origin: top;
 }
-
 img {
     width: 100%;
     padding: 0;
@@ -30,12 +26,10 @@ img {
     transition: 700ms;
     transform: rotateX(-90deg);
 }
-
 .indicators-wrapper {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 .list {
     list-style: none;
     text-align: center;
@@ -43,7 +37,6 @@ img {
     padding-left: 0;
     margin: 0;
 }
-
 .indicator {
     display: inline;
     margin: 5px;
@@ -54,13 +47,12 @@ img {
     transition: all 700ms;
     cursor: pointer;
 }
-
 .active {
     border-color: skyblue;
 }
 
 
-@media all and (min-width: 1200px) {
+@media all and (min-width: 1400px) {
     .wrapper {
     width: 1200px;
     height: 1068px;
